@@ -38,6 +38,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Views\Brand\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Data\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
 

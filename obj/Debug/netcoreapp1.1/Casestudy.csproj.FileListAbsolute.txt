@@ -8,3 +8,12 @@ D:\School\Semester #4\2nd Half\C#\Code\Casestudy\bin\Debug\netcoreapp1.1\Casestu
 D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.dll
 D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.pdb
 D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.csproj.GenerateResource.Cache
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\bin\Debug\netcoreapp1.1\Casestudy.deps.json
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\bin\Debug\netcoreapp1.1\Casestudy.runtimeconfig.json
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\bin\Debug\netcoreapp1.1\Casestudy.runtimeconfig.dev.json
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\obj\Debug\netcoreapp1.1\Casestudy.csprojResolveAssemblyReference.cache
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\obj\Debug\netcoreapp1.1\Casestudy.AssemblyInfo.cs
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\obj\Debug\netcoreapp1.1\Casestudy.dll
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\obj\Debug\netcoreapp1.1\Casestudy.pdb
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\bin\Debug\netcoreapp1.1\Casestudy.dll
+C:\Users\Jake Ojero\Desktop\Test\asp-net-core-store\bin\Debug\netcoreapp1.1\Casestudy.pdb

@@ -1,96 +1,59 @@
-#!/bin/sh
-#
-# Copyright (c) 2006, 2008 Junio C Hamano
-#
-# The "pre-rebase" hook is run just before "git rebase" starts doing
-# its job, and can prevent the command from running by exiting with
-# non-zero status.
-#
-# The hook is called with the following parameters:
-#
-# $1 -- the upstream the series was forked from.
-# $2 -- the branch being rebased (or empty when rebasing the current branch).
-#
-# This sample shows how to prevent topic branches that are already
-# merged to 'next' branch from getting rebased, because allowing it
-# would result in rebasing already published history.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using System.Data.SqlClient;
+using Casestudy.Models;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
 
-publish=next
-basebranch="$1"
-if test "$#" = 2
-then
-	topic="refs/heads/$2"
-else
-	topic=`git symbolic-ref HEAD` ||
-	exit 0 ;# we do not interrupt rebasing detached HEAD
-fi
+namespace Casestudy.Controllers
+{
+    public class DataController : Controller
+    {
+        AppDbContext _db;
+        IConfiguration config;
+        public DataController(AppDbContext context, IConfiguration config)
+        {
+            _db = context;
+            this.config = config;
+        }
 
-case "$topic" in
-refs/heads/??/*)
-	;;
-*)
-	exit 0 ;# we do not interrupt others.
-	;;
-esac
+        // GET: /<controller>/
+        public async Task<IActionResult> Index()
+        {
+            string sql = await getSqlFromWeb();
 
-# Now we are dealing with a topic branch being rebased
-# on top of master.  Is it OK to rebase it?
+            IEnumerable<string> commandStrings = Regex.Split(sql, @"^\s*GO\s*$",
+                          RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
-# Does the topic really exist?
-git show-ref -q "$topic" || {
-	echo >&2 "No such branch $topic"
-	exit 1
+            SqlConnection conn = new SqlConnection(config.GetConnectionString("DefaultConnection"));
+            conn.Open();
+            foreach (string commandString in commandStrings)
+            {
+                if (commandString.Trim() != "")
+                {
+                    using (var command = new SqlCommand(commandString, conn))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            conn.Close();
+            ViewBag.Finished = "Data Refreshed";
+            return View();
+        }
+
+        private async Task<String> getSqlFromWeb()
+        {
+            string url = "https://raw.githubusercontent.com/jakeojero/sql-casestudy/master/CaseStudyDBSetup.sql";
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+            return result;
+        }
+
+    }
 }
-
-# Is topic fully merged to master?
-not_in_master=`git rev-list --pretty=oneline ^master "$topic"`
-if test -z "$not_in_master"
-then
-	echo >&2 "$topic is fully merged to master; better remove it."
-	exit 1 ;# we could allow it, but there is no point.
-fi
-
-# Is topic ever merged to next?  If so you should not be rebasing it.
-only_next_1=`git rev-list ^master "^$topic" ${publish} | sort`
-only_next_2=`git rev-list ^master           ${publish} | sort`
-if test "$only_next_1" = "$only_next_2"
-then
-	not_in_topic=`git rev-list "^$topic" master`
-	if test -z "$not_in_topic"
-	then
-		echo >&2 "$topic is already up-to-date with master"
-		exit 1 ;# we could allow it, but there is no point.
-	else
-		exit 0
-	fi
-else
-	not_in_next=`git rev-list --pretty=oneline ^${publish} "$topic"`
-	/usr/bin/perl -e '
-		my $topic = $ARGV[0];
-		my $msg = "* $topic has commits already merged to public branch:\n";
-		my (%not_in_next) = map {
-			/^([0-9a-f]+) /;
-			($1 => 1);
-		} split(/\n/, $ARGV[1]);
-		for my $elem (map {
-				/^([0-9a-f]+) (.*)$/;
-				[$1 => $2];
-			} split(/\n/, $ARGV[2])) {
-			if (!exists $not_in_next{$elem->[0]}) {
-				if ($msg) {
-					print STDERR $msg;
-					undef $msg;
-				}
-				print STDERR " $elem->[1]\n";
-			}
-		}
-	' "$topic" "$not_in_next" "$not_in_master"
-	exit 1
-fi
-
-exit 0
-
-################################################################
-
-This sample hook safeguards topic branches that have been
-published from being rewoun

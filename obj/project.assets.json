@@ -10872,10 +10872,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\School\\Semester #4\\2nd Half\\C#\\Code\\Casestudy\\Casestudy.csproj",
+      "projectUniqueName": "C:\\Users\\Jake Ojero\\Desktop\\Test\\asp-net-core-store\\Casestudy.csproj",
       "projectName": "Casestudy",
-      "projectPath": "D:\\School\\Semester #4\\2nd Half\\C#\\Code\\Casestudy\\Casestudy.csproj",
-      "outputPath": "D:\\School\\Semester #4\\2nd Half\\C#\\Code\\Casestudy\\obj\\",
+      "projectPath": "C:\\Users\\Jake Ojero\\Desktop\\Test\\asp-net-core-store\\Casestudy.csproj",
+      "outputPath": "C:\\Users\\Jake Ojero\\Desktop\\Test\\asp-net-core-store\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
