@@ -1,0 +1,10 @@
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\bin\Debug\netcoreapp1.1\Casestudy.deps.json
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\bin\Debug\netcoreapp1.1\Casestudy.runtimeconfig.json
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\bin\Debug\netcoreapp1.1\Casestudy.runtimeconfig.dev.json
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.csprojResolveAssemblyReference.cache
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.AssemblyInfo.cs
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\bin\Debug\netcoreapp1.1\Casestudy.dll
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\bin\Debug\netcoreapp1.1\Casestudy.pdb
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.dll
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.pdb
+D:\School\Semester #4\2nd Half\C#\Code\Casestudy\obj\Debug\netcoreapp1.1\Casestudy.csproj.GenerateResource.Cache

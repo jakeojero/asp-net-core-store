@@ -1,0 +1,128 @@
+@model BrandViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="col-sm-2 col-xs-12">&nbsp;</div>
+<div class="text-center col-sm-8 col-xs-12">
+    <form asp-controller="Brand" asp-action="SelectBrand" method="post">
+        <div class="col-sm-4 col-xs-12">&nbsp;</div>
+        <div class="col-sm-4 col-xs-12" style="padding-bottom:5%;">
+            <span style="font-size:large;top:20px;position:relative;padding:5px;">Brands</span>
+
+            <select style="top:35px;position:relative;padding:5px;" asp-for="BrandId" asp-items="@Model.GetBrands()"
+                    class="form-group form-control" onchange="this.form.submit();">
+                <option selected style="display:none;">Select Brand</option>
+            </select>
+        </div>
+        <div class="col-sm-4 col-xs-12">&nbsp;</div>
+    </form>
+
+
+
+    @if (Context.Session.Get<ProductViewModel[]>("catalog") != null && Model.BrandId > 0)
+    {
+
+        <div class="col-xs-12" style="font-size:x-large;">
+           <span>Catalogue </span>
+        </div>
+        ProductViewModel[] products = Context.Session.Get<ProductViewModel[]>("catalog");
+        foreach (ProductViewModel item in products)
+        {
+
+            if (item.BrandId == Model.BrandId)
+            {
+                item.JsonData = JsonConvert.SerializeObject(item);
+                var id = "product" + item.Id;
+                var descr = "descr" + item.Id;
+                var btn = "modalbtn" + item.Id;
+
+                <div id="item" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="db-wrapper">
+                        <div class="db-pricing-seven">
+                            <ul>
+                                <li class="price">
+                                    <span style="font-size:large;">@item.ProductName <br/> <img style="height:150px; width: 200px;" src="~/img/@(item.GraphicName).jpg" /></span>
+                                </li>
+                                <li id="@descr" data-description="@item.Description">
+                                    <span style="font-size:large;">@item.Description.Substring(0, 20)...</span>
+                                </li>
+                                <li><span style="font-size:large;">Our Price: <strong>$@item.CostPrice.ToString("#.00")</strong></span></li>
+                                <li><a href="#details_popup" class="btn btn-default" data-toggle="modal" id="@btn" data-details="@item.JsonData" data-id="@item.Id">Details</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+
+    }
+
+    </div>
+
+<div class="modal" id="details_popup">
+    <div class="modal-dialog">
+        <div class="modal-content col-xs-12">
+            <div class="modal-body">
+                <a href="" style="font-size:xx-large" data-dismiss="modal" class="pull-right">X</a>
+                <div class="text-center" style="margin-bottom: 25px;">
+                    <img alt="" id="detailsGraphic" /><br />
+                    <h4 id="productName">Test</h4>
+                </div>
+                <form asp-controller="Brand" asp-action="SelectItem" method="post"
+                      role="form">
+
+                    <div class="row" style="margin-bottom: 25px;">
+                        <div class="col-xs-1">&nbsp;</div>
+                        <div class="col-xs-12 col-sm-4 text-center">
+                            <img alt="" style="width:100%; height:100%;" id="productImage" src="~/img/test.jpg"/>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 text-center">
+                            <p id="productDescription">here</p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 25px; font-size:medium">
+                        <div class="col-xs-2">&nbsp;</div>
+                        <div class="col-xs-5">
+                            <strong>Price: $<span id="productPrice">1234.56</span></strong>
+                        </div>
+                        <div class="col-xs-5">
+                            <strong>Qty:</strong> <input asp-for="Qty" type="number" maxlength="3" size="3"
+                                   style="width: 50px;" id="qty" />
+                            <input asp-for="Id" type="hidden" id="detailsId" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-4">
+                            <button type="submit" class="btn btn-default btn-block" id="modalbtn">
+                                Add To Cart
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <button class="btn btn-default btn-block" id="modalbtn">
+                                Remove Item
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <button class="btn btn-danger btn-block" id="modalbtn">
+                                View Cart
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div id="results" class="text-center">
+                    @ViewBag.AddMessage
+                </div>
+            </div>
+        </div><!--modal-content-->
+    </div><!--modal-dialog-->
+</div><!--modal-->
+
+
