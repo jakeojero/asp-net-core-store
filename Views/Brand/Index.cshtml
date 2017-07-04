@@ -48,7 +48,7 @@
                                     <span style="font-size:large;">@item.Description.Substring(0, 20)...</span>
                                 </li>
                                 <li><span style="font-size:large;">Our Price: <strong>$@item.CostPrice.ToString("#.00")</strong></span></li>
-                                <li><a href="#details_popup" class="btn btn-default" data-toggle="modal" id="@btn" data-details="@item.JsonData" data-id="@item.Id">Details</a></li>
+                                <li><a href="#details_popup" class="btn btn-primary" data-toggle="modal" id="@btn" data-details="@item.JsonData" data-id="@item.Id">Details</a></li>
                             </ul>
                         </div>
                     </div>
@@ -103,12 +103,12 @@
                             </button>
                         </div>
                         <div class="col-xs-12 col-sm-4">
-                            <button class="btn btn-default btn-block" id="modalbtn">
+                            <button class="btn btn-danger btn-block" id="modalbtn">
                                 Remove Item
                             </button>
                         </div>
                         <div class="col-xs-12 col-sm-4">
-                            <button class="btn btn-danger btn-block" id="modalbtn">
+                            <button class="btn btn-primary btn-block" id="modalbtn">
                                 View Cart
                             </button>
                         </div>

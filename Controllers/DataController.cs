@@ -29,20 +29,28 @@ namespace Casestudy.Controllers
             IEnumerable<string> commandStrings = Regex.Split(sql, @"^\s*GO\s*$",
                           RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
-            SqlConnection conn = new SqlConnection(config.GetConnectionString("DefaultConnection"));
-            conn.Open();
-            foreach (string commandString in commandStrings)
+            try
             {
-                if (commandString.Trim() != "")
+                SqlConnection conn = new SqlConnection(config.GetConnectionString("DefaultConnection"));
+                conn.Open();
+                foreach (string commandString in commandStrings)
                 {
-                    using (var command = new SqlCommand(commandString, conn))
+                    if (commandString.Trim() != "")
                     {
-                        command.ExecuteNonQuery();
+                        using (var command = new SqlCommand(commandString, conn))
+                        {
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
+                conn.Close();
+                ViewBag.Finished = "Data Refreshed";
             }
-            conn.Close();
-            ViewBag.Finished = "Data Refreshed";
+            catch (Exception ex)
+            {
+                ViewBag.Finished = "Error: " + ex.Message;
+            }
+           
             return View();
         }
 

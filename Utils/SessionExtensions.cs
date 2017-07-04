@@ -16,5 +16,6 @@ namespace Casestudy.Utils
             return value == null ? default(T) :
             JsonConvert.DeserializeObject<T>(value);
         }
-    }
+    }
+
 }

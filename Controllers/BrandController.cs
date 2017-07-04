@@ -23,7 +23,7 @@ namespace Casestudy.Controllers
         {
             BrandViewModel vm = new BrandViewModel();
             // only build the catalogue once
-            if (HttpContext.Session.Get<List<Brand>>("categories") == null)
+            if (HttpContext.Session.Get<List<Brand>>("brands") == null)
             {
                 try
                 {
