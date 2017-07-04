@@ -41,8 +41,8 @@
                     <div class="db-wrapper">
                         <div class="db-pricing-seven">
                             <ul>
-                                <li class="price">
-                                    <span style="font-size:large;">@item.ProductName <br/> <img style="height:150px; width: 200px;" src="~/img/@(item.GraphicName).jpg" /></span>
+                                <li class="price" style="padding-left:0; padding-right:0;">
+                                    <span style="font-size:large;">@item.ProductName <br/> <img style="height:200px; max-width: 200px;" src="~/img/@(item.GraphicName).jpg" /></span>
                                 </li>
                                 <li id="@descr" data-description="@item.Description">
                                     <span style="font-size:large;">@item.Description.Substring(0, 20)...</span>
