@@ -4,7 +4,7 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-@{ 
+@{
     Dictionary<int, object> cart = Context.Session.Get<Dictionary<int, Object>>("cart");
     decimal subtotal = 0.0M;
     decimal tax = 0.0M;
@@ -12,87 +12,87 @@
     decimal tax_rate = 0.13M;
 }
 
-<div class="container">
-  
-        <div class="panel-title text-center" style="padding-top:20px;">
-            <h3 style="font-weight:bolder">Cart Contents</h3>
-            <img src="/img/cart.png" style="height:10%;width:10%;padding-bottom:5%;" />
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-10 col-md-offset-1">
-                <table class="table table-striped table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Product Name</th>
-                            <th>MSRP</th>
-                            <th>Qty</th>
-                            <th>Extended</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{ 
-                            if(cart != null)
-                            {
-                                foreach (var key in cart.Keys)
-                                {
-                                    ProductViewModel product = JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(cart[key]));
-                                    if (product.Qty > 0)
-                                    {
-                                        subtotal += (product.CostPrice * product.Qty);
-                                        <tr>
-                                            <td>@product.Id</td>
-                                            <td>@product.ProductName</td>
-                                            <td>$@product.MSRP.ToString("#,##.00")</td>
-                                            <td>@product.Qty</td>
-                                            <td>$@product.CostPrice.ToString("#,##.00")</td>
-                                        </tr>
-                                    }
-                                }
-                                tax = subtotal * tax_rate;
-                                orderTotal = subtotal + tax;
-                            }
-                        }
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><h5>Subtotal</h5></td>
-                            <td><h5><strong>$@subtotal.ToString("#,##.00")</strong></h5></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><h5>Tax</h5></td>
-                            <td><h5><strong>$@tax.ToString("#,##.00")</strong></h5></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><h5>Total</h5></td>
-                            <td><h5><strong>$@orderTotal.ToString("#,##.00")</strong></h5></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="/Brand" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                                </a>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success">
-                                    Add Order <span class="glyphicon glyphicon-play"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="text-center table-title-sm">
+        <h3 style="font-weight:bolder">Cart Contents</h3>
+        <img src="/img/cart.png" style="height:10%;width:10%;padding-bottom:5%;" />
     </div>
+
+
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 table-responsive">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Product Name</th>
+                <th>MSRP</th>
+                <th>Qty</th>
+                <th>Extended</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (cart != null)
+                {
+                    foreach (var key in cart.Keys)
+                    {
+                        ProductViewModel product = JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(cart[key]));
+                        if (product.Qty > 0)
+                        {
+                            subtotal += (product.CostPrice * product.Qty);
+                            <tr>
+                                <td>@product.Id</td>
+                                <td>@product.ProductName</td>
+                                <td>$@product.MSRP.ToString("#,##.00")</td>
+                                <td style="width:10%">@product.Qty</td>
+                                <td>$@product.CostPrice.ToString("#,##.00")</td>
+                            </tr>
+                        }
+                    }
+                    tax = subtotal * tax_rate;
+                    orderTotal = subtotal + tax;
+                }
+            }
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h5>Subtotal</h5></td>
+                <td><h5><strong>$@subtotal.ToString("#,##.00")</strong></h5></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h5>Tax</h5></td>
+                <td><h5><strong>$@tax.ToString("#,##.00")</strong></h5></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h5>Total</h5></td>
+                <td><h5><strong>$@orderTotal.ToString("#,##.00")</strong></h5></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a href="/Brand" class="btn btn-default">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                    </a>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success">
+                        Add Order <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
 
