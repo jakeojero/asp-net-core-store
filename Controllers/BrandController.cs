@@ -83,14 +83,14 @@ namespace Casestudy.Controllers
         [HttpPost]
         public ActionResult SelectItem(BrandViewModel vm)
         {
-            Dictionary<int, object> tray;
-            if (HttpContext.Session.Get<Dictionary<int, Object>>("tray") == null)
+            Dictionary<int, object> cart;
+            if (HttpContext.Session.Get<Dictionary<int, Object>>("cart") == null)
             {
-                tray = new Dictionary<int, object>();
+                cart = new Dictionary<int, object>();
             }
             else
             {
-                tray = HttpContext.Session.Get<Dictionary<int, object>>("tray");
+                cart = HttpContext.Session.Get<Dictionary<int, object>>("cart");
             }
             ProductViewModel[] menu = HttpContext.Session.Get<ProductViewModel[]>("catalog");
             String retMsg = "";
@@ -103,12 +103,12 @@ namespace Casestudy.Controllers
                     {
                         item.Qty = vm.Qty;
                         retMsg = vm.Qty + " - item(s) Added!";
-                        tray[id] = item;
+                        cart[id] = item;
                     }
                     else
                     {
                         item.Qty = 0;
-                        tray.Remove(id);
+                        cart.Remove(id);
                         retMsg = "item(s) Removed!";
                     }
                     vm.BrandId = item.BrandId;
@@ -116,7 +116,7 @@ namespace Casestudy.Controllers
                 }
             }
             ViewBag.AddMessage = retMsg;
-            HttpContext.Session.Set<Dictionary<int, Object>>("tray", tray);
+            HttpContext.Session.Set<Dictionary<int, Object>>("cart", cart);
             vm.SetBrands(HttpContext.Session.Get<List<Brand>>("brands"));
             return View("Index", vm);
 

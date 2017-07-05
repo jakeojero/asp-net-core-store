@@ -12,6 +12,7 @@
     <Content Include="wwwroot\img\asus-rog.jpg" />
     <Content Include="wwwroot\img\asus-x5.jpg" />
     <Content Include="wwwroot\img\asus-zenbook.jpg" />
+    <Content Include="wwwroot\img\cart.png" />
     <Content Include="wwwroot\img\hp-envy.jpg" />
     <Content Include="wwwroot\img\hp-omen.jpg" />
     <Content Include="wwwroot\img\hp-pavillion.jpg" />
@@ -39,6 +40,7 @@
     <Folder Include="Views\Brand\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Data\" />
+    <Folder Include="Views\Cart\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
 

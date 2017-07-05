@@ -21,7 +21,7 @@ namespace Casestudy.Models
 
         public string GetName(int id)
         {
-            Brand brand = _db.Brands.First(c => c.Id == id);
+            Brand brand = _db.Brands.FirstOrDefault(c => c.Id == id);
             return brand.Name;
         }
 
