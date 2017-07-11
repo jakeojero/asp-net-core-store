@@ -83,25 +83,25 @@ namespace Casestudy.Controllers
         [HttpPost]
         public ActionResult SelectItem(BrandViewModel vm)
         {
-            Dictionary<int, object> cart;
-            if (HttpContext.Session.Get<Dictionary<int, Object>>("cart") == null)
+            Dictionary<string, object> cart;
+            if (HttpContext.Session.Get<Dictionary<string, Object>>("cart") == null)
             {
-                cart = new Dictionary<int, object>();
+                cart = new Dictionary<string, object>();
             }
             else
             {
-                cart = HttpContext.Session.Get<Dictionary<int, object>>("cart");
+                cart = HttpContext.Session.Get<Dictionary<string, object>>("cart");
             }
             ProductViewModel[] menu = HttpContext.Session.Get<ProductViewModel[]>("catalog");
             String retMsg = "";
             foreach (ProductViewModel item in menu)
             {
-                if (Convert.ToInt32(item.Id) == vm.Id)
+                if (item.Id == vm.Id)
                 {
-                    var id = Convert.ToInt32(item.Id);
+                    var id = item.Id;
                     if (vm.Qty > 0) // update only selected item
                     {
-                        item.Qty = vm.Qty;
+                        item.Qty += vm.Qty;
                         retMsg = vm.Qty + " - item(s) Added!";
                         cart[id] = item;
                     }
@@ -115,8 +115,19 @@ namespace Casestudy.Controllers
                     break;
                 }
             }
+
+            if(cart.Count > 0)
+            {
+                ViewBag.showCartButton = true;
+            }
+            else
+            {
+                ViewBag.showCartButton = false;
+            }
+
             ViewBag.AddMessage = retMsg;
-            HttpContext.Session.Set<Dictionary<int, Object>>("cart", cart);
+            HttpContext.Session.Set<ProductViewModel[]>("catalog", menu);
+            HttpContext.Session.Set<Dictionary<string, Object>>("cart", cart);
             vm.SetBrands(HttpContext.Session.Get<List<Brand>>("brands"));
             return View("Index", vm);
 

@@ -5,11 +5,12 @@
 }
 
 @{
-    Dictionary<int, object> cart = Context.Session.Get<Dictionary<int, Object>>("cart");
+    Dictionary<string, object> cart = Context.Session.Get<Dictionary<string, Object>>("cart");
     decimal subtotal = 0.0M;
     decimal tax = 0.0M;
     decimal orderTotal = 0.0M;
     decimal tax_rate = 0.13M;
+    decimal extended_price = 0.0M;
 }
 
 
@@ -39,13 +40,14 @@
                         ProductViewModel product = JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(cart[key]));
                         if (product.Qty > 0)
                         {
-                            subtotal += (product.CostPrice * product.Qty);
+                            subtotal += (product.MSRP * product.Qty);
+                            extended_price = product.MSRP * product.Qty;
                             <tr>
                                 <td>@product.Id</td>
                                 <td>@product.ProductName</td>
                                 <td>$@product.MSRP.ToString("#,##.00")</td>
                                 <td style="width:10%">@product.Qty</td>
-                                <td>$@product.CostPrice.ToString("#,##.00")</td>
+                                <td>$@extended_price.ToString("#,##.00")</td>
                             </tr>
                         }
                     }

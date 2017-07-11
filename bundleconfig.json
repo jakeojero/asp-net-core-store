@@ -8,7 +8,8 @@
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
-      "wwwroot/js/product-modal.js"
+      "wwwroot/js/product-modal.js",
+      "wwwroot/js/register.js"
     ],
     "minify": {
       "enabled": true,
