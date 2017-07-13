@@ -31,6 +31,7 @@
     <Content Include="wwwroot\img\mackbook-air.jpg" />
     <Content Include="wwwroot\img\mackbook-air.png" />
     <Content Include="wwwroot\img\test.jpg" />
+    <Content Include="wwwroot\js\login.js" />
     <Content Include="wwwroot\js\product-modal.js" />
     <Content Include="wwwroot\js\register.js" />
   </ItemGroup>
@@ -42,6 +43,7 @@
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Data\" />
     <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Login\" />
     <Folder Include="Views\Register\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>

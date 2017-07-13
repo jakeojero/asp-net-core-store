@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Casestudy.Models;
+using Casestudy.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Casestudy.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -37,13 +38,25 @@ namespace Casestudy.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email,
+                                                 Email = model.Email,
+                                                 Age = model.Age,
+                                                 Address1 = model.Address1,
+                                                 CreditcardType = model.CreditcardType,
+                                                 Region = model.Region,
+                                                 City = model.City,
+                                                 Country = model.Country,
+                                                 Firstname = model.Firstname,
+                                                 Lastname = model.Lastname,
+                                                 Mailcode = model.Mailcode
+                                               };
+
                 var result = await _usrMgr.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _signInMgr.SignInAsync(user, isPersistent: false);
-                    HttpContext.Session.SetString("LoginStatus", "logged on as " + model.Email);
-                    HttpContext.Session.SetString("Message", "Registered, logged on as " + model.Email);
+                    HttpContext.Session.SetString(SessionVars.LoginStatus, "logged on as " + model.Email);
+                    HttpContext.Session.SetString(SessionVars.Message, "Registered, logged on as " + model.Email);
                 }
                 else
                 {

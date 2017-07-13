@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SessionUtils SessionUtils
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -23,11 +25,35 @@
         </div>
         <div class="col-md-2"></div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav" id="menu">
+            @*<span class="pull-right" style="padding-right:5%;padding-top:1%;">@Context.Session.GetString(SessionVars.LoginStatus)</span>*@
+            <ul class="nav navbar-nav navbar-left" id="menu">
                 <li><a href="/Home">Home</a></li>
                 <li><a href="/Data">Data Refresh</a></li>
                 <li><a href="/Brand">Brands</a></li>
                 <li><a href="/Register">Register</a></li>
+                
+                @if (@SessionUtils.UserExists())
+                {
+                    <li><a href="/Login/Logoff">Logoff</a></li>
+                }
+                else
+                {
+                    <li><a href="/Login">Login</a></li>
+                }
+                
+
+
+
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>
+                    <span class="glyphicon glyphicon-user" style="padding-right: 5px;"></span>@Context.Session.GetString(SessionVars.LoginStatus)
+                </a></li>
+                @if (SessionUtils.CartContainsItems())
+                {
+                    <li><a  style="margin-right: 50px;" href="/Cart"><span class="glyphicon glyphicon-shopping-cart" style="padding-right: 5px;"></span>@SessionUtils.GetCartSize() Products</a></li>
+                }
             </ul>
         </div>
     </nav>

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using Microsoft.Extensions.Configuration;
 using Casestudy.Models;
+using Casestudy.Utils;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,10 +33,14 @@ namespace Casestudy
             // Add framework services.
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
+
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<SessionUtils>();
+
             services.AddMvc();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

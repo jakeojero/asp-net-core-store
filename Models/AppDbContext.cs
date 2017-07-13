@@ -16,8 +16,17 @@ namespace Casestudy.Models
             builder.Entity<Brand>().ForSqlServerToTable("Brands")
                 .Property(c => c.Id).UseSqlServerIdentityColumn();
             builder.Entity<Product>().ForSqlServerToTable("Products");
+
+            builder.Entity<Order>().ForSqlServerToTable("Orders")
+                .Property(c => c.Id).UseSqlServerIdentityColumn();
+
+            builder.Entity<OrderLineItem>().ForSqlServerToTable("OrderItems")
+                .Property(c => c.Id).UseSqlServerIdentityColumn();
         }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderLineItem> OrderItems { get; set; }
+        
     }
 }

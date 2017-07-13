@@ -87,9 +87,14 @@
                     </a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-success">
-                        Add Order <span class="glyphicon glyphicon-play"></span>
-                    </button>
+                    <form asp-controller="Cart" asp-action="AddOrder" method="post" role="form">
+                        @if (Context.Session.GetString(SessionVars.User) != null)
+                        {
+                            <button type="submit" class="btn btn-success">
+                                Add Order <span class="glyphicon glyphicon-play"></span>
+                            </button>
+                        }
+                    </form>
                 </td>
             </tr>
         </tbody>
