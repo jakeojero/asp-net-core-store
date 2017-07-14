@@ -3,10 +3,207 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/_Layout.cshtml";
 }
-<div class="text-center padTop10">
-    <h6>&copy;Info3067 - 2017</h6>
-    <br />
-    <h4>@ViewBag.Message</h4>
+<div class="row" id="loginParentDiv" style="margin-top:60px">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+
+        @*@if (Context.Session.GetString(SessionVars.Message) == "Login attempt failed")
+        {
+            <div class="alert alert-danger text-center" style="margin-bottom:5%;">
+                @ViewBag.Message
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center" style="margin-bottom:5%;">
+                @ViewBag.Message
+            </div>
+        }*@
+
+        <form asp-controller="Register" asp-action="Register" method="post" role="form" id="registerForm">
+            <fieldset>
+                <h2>Please Register</h2>
+                <hr class="colorgraph">
+
+
+                <ul class="nav nav-tabs text-center" style="width:100%;">
+                    <li class="active"><span class="glyphicon glyphicon-user" style="padding-right:2%;"></span><a href="#personal" data-toggle="tab">Personal</a></li>
+                    <li><span class="glyphicon glyphicon-home" style="padding-right:2%;"></span><a href="#address" data-toggle="tab">Address</a></li>
+                    <li><span class="glyphicon glyphicon-wrench" style="padding-right:2%;"></span><a href="#account" data-toggle="tab">Account</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="personal">
+
+                        <!-- First Name -->
+                        <div class="form-group">
+                                <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                    <label asp-for="Firstname"></label>
+                                </div>
+                                <div class="col-xs-7" style="margin-bottom:5px;">
+                                    <input asp-for="Firstname" class="form-control" placeholder="First Name" />
+                                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Lastname"></label>
+                            </div>
+
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Lastname" class="form-control" placeholder="Last Name" />
+                                <span asp-validation-for="Lastname" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Age"></label>
+                            </div>
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Age" type="number" class="form-control" />
+                                <span asp-validation-for="Age" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- CreditcardType -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="CreditcardType">Credit Card Co</label>
+                            </div>
+                           
+                            <div class="col-xs-7">
+                                <select asp-for="CreditcardType" class="form-control">
+                                    <option>Visa</option>
+                                    <option>Mastercard</option>
+                                    <option>Amex</option>
+                                </select>
+                                <span asp-validation-for="CreditcardType" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="address">
+                        <!-- Address -->
+                        <div class="form-group">
+                            <div  class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Address1">Address</label>
+                            </div>
+                            
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Address1" class="form-control" placeholder="Address" />
+                                <span asp-validation-for="Address1" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="City"></label>
+                            </div>
+
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="City" class="form-control" placeholder="City" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Region -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Region"></label>
+                            </div>
+
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Region" class="form-control" placeholder="Region" />
+                                <span asp-validation-for="Region" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Country -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Country"></label>
+                            </div>
+
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <select asp-for="Country" class="form-control">
+                                    <option>Canada</option>
+                                    <option>USA</option>
+                                </select>
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Mail Code -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Mailcode"></label>
+                            </div>
+
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Mailcode" class="form-control" placeholder="Mailcode" />
+                                <span asp-validation-for="Mailcode" class="text-danger"></span>
+                            </div>
+                        </div>
+  
+
+
+                    </div>
+                    <div class="tab-pane" id="account">
+                        <!-- Email -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Email"></label>
+                            </div>
+
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Email" class="form-control" placeholder="Email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="Password"></label>
+                            </div>
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Repeat Password -->
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right" style="margin-top:1%;">
+                                <label asp-for="RepeatPassword"></label>
+                            </div>
+                            <div class="col-xs-7" style="margin-bottom:5px;">
+                                <input asp-for="RepeatPassword" type="password" class="form-control" placeholder="Repeat Password" />
+                                <span asp-validation-for="RepeatPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <div class="col-xs-12 text-center">
+                                <button type="submit" class="btn btn-default">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </fieldset>
+        </form>
+        <hr class="colorgraph">
+
+    </div>
 </div>
 
 <!-- modal code -->

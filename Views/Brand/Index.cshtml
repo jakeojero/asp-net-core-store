@@ -4,7 +4,7 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<div class="text-center col-sm-8 col-sm-offset-2 col-xs-12">
+<div id="brandsDiv" class="text-center col-sm-8 col-sm-offset-2 col-xs-12">
 
     <form asp-controller="Brand" asp-action="SelectBrand" method="post">
         
@@ -19,21 +19,6 @@
         
     </form>
     <div class="col-sm-4 col-xs-12">&nbsp;</div>
-
-    <div id="results" class="col-sm-6 col-sm-offset-3 col-xs-12">
-        @{
-            if (ViewBag.showCartButton != null && ViewBag.showCartButton)
-            {
-                <div class="alert alert-success">
-                    @ViewBag.AddMessage
-                    <a href="/Cart" class="btn btn-default" style="margin-left:5px;">
-                        View Cart
-                    </a>
-                </div>
-            }
-        }
-
-    </div>
 
     <products brand="@Model.BrandId"></products>
 </div>

@@ -33,7 +33,7 @@ namespace Casestudy.Controllers
             }
             if (Convert.ToString(HttpContext.Session.Get(SessionVars.LoginStatus)) == "not logged in")
             {
-                HttpContext.Session.SetString(SessionVars.Message, "most functionality requires you to login!");
+                HttpContext.Session.SetString(SessionVars.Message, "Most functionality requires you to login!");
             }
             ViewBag.status = HttpContext.Session.GetString(SessionVars.LoginStatus);
             ViewBag.message = HttpContext.Session.GetString(SessionVars.Message);
@@ -85,7 +85,7 @@ namespace Casestudy.Controllers
                 }
                 else
                 {
-                    HttpContext.Session.SetString(SessionVars.Message, "login attempt failed");
+                    HttpContext.Session.SetString(SessionVars.Message, "Login attempt failed");
                     ViewBag.status = HttpContext.Session.GetString(SessionVars.LoginStatus);
                     ViewBag.message = HttpContext.Session.GetString(SessionVars.Message);
                     return View("Index");
