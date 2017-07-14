@@ -34,14 +34,7 @@
                         <li><a href="/Brand">Brands</a></li>
                         <li><a href="/Register">Register</a></li>
 
-                        @if (@SessionUtils.UserExists())
-                        {
-                            <li><a href="/Login/Logoff">Logoff</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="/Login">Login</a></li>
-                        }
+
 
 
                     </ul>
@@ -63,6 +56,15 @@
                                     <span class="glyphicon glyphicon-user" style="padding-right: 5px;"></span>@Context.Session.GetString(SessionVars.LoginStatus)
                                 </a>
                             </li>
+                        }
+
+                        @if (@SessionUtils.UserExists())
+                        {
+                            <li><a href="/Login/Logoff" style="margin-right: 50px;">Logoff</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Login" style="margin-right: 50px;">Login</a></li>
                         }
                     </ul>
                 </div>

@@ -1,7 +1,5 @@
 ﻿$(function () {
-    if ($("#register_popup") != undefined) {
-        $('#register_popup').modal('show');
-    }
+
 
     $('.nav-tabs a').on('show.bs.tab', function (e) {
 

@@ -52,6 +52,8 @@ namespace Casestudy.Controllers
                                                };
 
                 var result = await _usrMgr.CreateAsync(user, model.Password);
+
+                ViewBag.RegisterError = false;
                 if (result.Succeeded)
                 {
                     await _signInMgr.SignInAsync(user, isPersistent: false);
@@ -60,7 +62,8 @@ namespace Casestudy.Controllers
                 }
                 else
                 {
-                    ViewBag.message = "registration failed - " + result.Errors.First().Description;
+                    ViewBag.RegisterError = true;
+                    ViewBag.message = "Registration failed - " + result.Errors.First().Description;
                     return View("Index");
                 }
             }

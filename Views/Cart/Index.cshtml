@@ -50,9 +50,16 @@
                                 <td>$@extended_price.ToString("#,##.00")</td>
                             </tr>
                         }
+
+                        if (@product.QtyOnHand == 0)
+                        {
+                            ViewBag.ItemsBackordered = true;
+                        }
                     }
                     tax = subtotal * tax_rate;
                     orderTotal = subtotal + tax;
+
+
                 }
             }
 
@@ -80,7 +87,10 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td>
+                    <a href="/Cart/ClearCart" class="btn btn-info">
+                        <span class="glyphicon glyphicon-trash"></span> Clear Cart
+                    </a></td>
                 <td>
                     <a href="/Brand" class="btn btn-default">
                         <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
@@ -99,6 +109,14 @@
             </tr>
         </tbody>
     </table>
+
+    @if (ViewBag.ItemsBackordered != null && ViewBag.ItemsBackordered == true)
+    {
+        <div class="alert alert-info text-center" style="margin-top:5%; font-size: 150%;">
+            Some Items were sold out and will be placed on backorder.
+        </div>
+    }
+
 </div>
 
 

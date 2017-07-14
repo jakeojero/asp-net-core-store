@@ -12,6 +12,10 @@
         $("#results").text("");
         CopyToModal(Id, data);
     });
+
+    $("#btnRemove").on("click", function (e) {
+        $("#qty").val(0);
+    });
 });
 
 function CopyToModal(id, data) {

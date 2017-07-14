@@ -1,4 +1,4 @@
-bin
-obj
-properties
+/bin
+/obj
+/properties
 appsettings.json
