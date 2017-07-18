@@ -37,7 +37,9 @@ namespace Casestudy.Models
                                 JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(items[key]));
                             if (product.Qty > 0)
                             {
-                                order.OrderAmount += (product.MSRP * product.Qty);
+                                decimal tax = 1.13M;
+                                decimal total = (product.MSRP * product.Qty) * tax;
+                                order.OrderAmount += total;
                             }
                         }
                         _db.Orders.Add(order);
@@ -57,7 +59,7 @@ namespace Casestudy.Models
 
 
                             Product retProduct = _db.Products
-                                .FirstOrDefault(p => p.ProductName == product.ProductName);
+                                .FirstOrDefault(p => p.Id == product.Id);
 
                             if (product.Qty < product.QtyOnHand)
                             {

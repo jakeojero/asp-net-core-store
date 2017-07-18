@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Casestudy.Models;
 using Casestudy.ViewModels;
 using Casestudy.Utils;
+using Newtonsoft.Json;
 
 namespace Casestudy.Controllers
 {
@@ -101,9 +102,20 @@ namespace Casestudy.Controllers
                     var id = item.Id;
                     if (vm.Qty > 0) // update only selected item
                     {
-                        item.Qty += vm.Qty;
+                        // If Item exists in the cart
+                        if (cart.ContainsKey(id))
+                        {
+                            var existingItem = JsonConvert.DeserializeObject<ProductViewModel>(cart[id].ToString());
+                            existingItem.Qty += vm.Qty;
+                            cart[id] = existingItem;
+                        }
+                        else
+                        {
+                            item.Qty = vm.Qty;
+                            cart[id] = item;
+                        }
+
                         retMsg = vm.Qty + " - item(s) Added!";
-                        cart[id] = item;
                     }
                     else
                     {
