@@ -18,7 +18,7 @@ namespace Casestudy.Controllers
             }
             if (HttpContext.Session.GetString(SessionVars.LoginStatus) == "not logged in")
             {
-                HttpContext.Session.SetString(SessionVars.Message, "most functionality requires you to login!");
+                HttpContext.Session.SetString(SessionVars.Message, "Most functionality requires you to login!");
             }
             ViewBag.Status = HttpContext.Session.GetString(SessionVars.LoginStatus);
             ViewBag.Message = HttpContext.Session.GetString(SessionVars.Message);

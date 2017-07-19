@@ -33,8 +33,7 @@ namespace Casestudy.Models
 
                         foreach (var key in items.Keys)
                         {
-                            ProductViewModel product =
-                                JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(items[key]));
+                            ProductViewModel product = JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(items[key]));
                             if (product.Qty > 0)
                             {
                                 decimal tax = 1.13M;
@@ -58,13 +57,12 @@ namespace Casestudy.Models
                             };
 
 
-                            Product retProduct = _db.Products
-                                .FirstOrDefault(p => p.Id == product.Id);
+                            oItem.Product = _db.Products.FirstOrDefault(p => p.Id == product.Id);
 
                             if (product.Qty < product.QtyOnHand)
                             {
-                                retProduct.QtyOnHand -= product.Qty;
-                                _db.Products.Update(retProduct);
+                                oItem.Product.QtyOnHand -= product.Qty;
+                                _db.Products.Update(oItem.Product);
 
                                 oItem.QtySold = product.Qty;
                                 oItem.QtyOrdered = product.Qty;
@@ -72,9 +70,9 @@ namespace Casestudy.Models
                             }
                             else if (product.Qty > product.QtyOnHand)
                             {
-                                retProduct.QtyOnHand = 0;
-                                retProduct.QtyOnBackOrder += (product.Qty - product.QtyOnHand);
-                                _db.Products.Update(retProduct);
+                                oItem.Product.QtyOnHand = 0;
+                                oItem.Product.QtyOnBackOrder += (product.Qty - product.QtyOnHand);
+                                _db.Products.Update(oItem.Product);
 
                                 oItem.QtySold = product.QtyOnHand;
                                 oItem.QtyOrdered = product.Qty;

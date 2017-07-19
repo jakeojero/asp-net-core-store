@@ -59,7 +59,8 @@ namespace Casestudy.Controllers
 
         public ActionResult ClearCart()
         {
-            HttpContext.Session.Remove("cart");
+            HttpContext.Session.Remove(SessionVars.Cart);
+            HttpContext.Session.SetString(SessionVars.Message, "Cart Cleared!");
             return Redirect("/Home");
         }
     }

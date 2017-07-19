@@ -24,6 +24,7 @@
     <Content Include="wwwroot\img\lenovo-thinkpad-t470.jpg" />
     <Content Include="wwwroot\img\lenovo-thinkpad-x1.jpg" />
     <Content Include="wwwroot\img\lenovo-yoga.jpg" />
+    <Content Include="wwwroot\img\logo.png" />
     <Content Include="wwwroot\img\mac-mini.jpg" />
     <Content Include="wwwroot\img\macbook-air.jpg" />
     <Content Include="wwwroot\img\macbook-pro.jpg" />
