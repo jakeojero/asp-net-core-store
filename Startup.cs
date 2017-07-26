@@ -45,7 +45,7 @@ namespace Casestudy
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(120);
+                options.IdleTimeout = TimeSpan.FromSeconds(6000);
                 options.CookieHttpOnly = true;
             });
         }

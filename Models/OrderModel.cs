@@ -16,6 +16,32 @@ namespace Casestudy.Models
             _db = context;
         }
 
+        public List<OrderViewModel> GetOrderDetails(int oid, string uid)
+        {
+            List<OrderViewModel> allDetails = new List<OrderViewModel>();
+            // LINQ way of doing INNER JOINS
+            var results = from t in _db.Set<Order>()
+                          join oi in _db.Set<OrderLineItem>() on t.Id equals oi.OrderId
+                          join p in _db.Set<Product>() on oi.ProductId equals p.Id
+                          where (t.UserId == uid && t.Id == oid)
+                          select new OrderViewModel
+                          {
+                              OrderId = t.Id,
+                              UserId = uid,
+                              ProductId = p.Id,
+                              OrderAmount = t.OrderAmount,
+                              Tax = t.OrderAmount - t.OrderAmount / 1.13M,
+                              SubTotal = t.OrderAmount / 1.13M,
+                              SellingPrice = oi.SellingPrice,
+                              QtySold = oi.QtySold,
+                              QtyBackOrdered = oi.QtyBackOrdered,
+                              QtyOrdered = oi.QtyOrdered,
+                              ProductName = p.ProductName,
+                              OrderDate = t.OrderDate.ToString("yyyy/MM/dd - hh:mm tt")
+                          };
+            allDetails = results.ToList<OrderViewModel>();
+            return allDetails;
+        }
         public int AddOrder(Dictionary<string, object> items, string user, ref string addedMessage)
         {
             int orderId = -1;
@@ -31,6 +57,7 @@ namespace Casestudy.Models
                         order.OrderDate = System.DateTime.Now;
                         order.OrderAmount = 0;
 
+                        // Loop to get Order Total
                         foreach (var key in items.Keys)
                         {
                             ProductViewModel product = JsonConvert.DeserializeObject<ProductViewModel>(Convert.ToString(items[key]));
@@ -59,7 +86,8 @@ namespace Casestudy.Models
 
                             oItem.Product = _db.Products.FirstOrDefault(p => p.Id == product.Id);
 
-                            if (product.Qty < product.QtyOnHand)
+                            // If theres enough stock
+                            if (product.Qty <= product.QtyOnHand)
                             {
                                 oItem.Product.QtyOnHand -= product.Qty;
                                 _db.Products.Update(oItem.Product);
@@ -68,6 +96,7 @@ namespace Casestudy.Models
                                 oItem.QtyOrdered = product.Qty;
                                 oItem.QtyBackOrdered = 0;
                             }
+                            // Not enough stock
                             else if (product.Qty > product.QtyOnHand)
                             {
                                 oItem.Product.QtyOnHand = 0;

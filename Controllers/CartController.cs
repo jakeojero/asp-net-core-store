@@ -22,6 +22,39 @@ namespace Casestudy.Controllers
             return View();
         }
 
+        public IActionResult List()
+        {
+            // Cant list Trays unless they're logged on
+            if (HttpContext.Session.GetString(SessionVars.User) == null)
+            {
+                return Redirect("/Login");
+            }
+
+            return View("List");
+        }
+
+
+        [Route("[action]")]
+        public IActionResult GetUsersOrders()
+        {
+            var user = HttpContext.Session.GetString(SessionVars.User);
+            if(user != null)
+            {
+                return Ok(_db.Orders.Where(order => order.UserId == user).ToList<Order>());
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("[action]/{oid:int}")]
+        public IActionResult GetOrderDetails(int oid)
+        {
+            OrderModel model = new OrderModel(_db);
+            return Ok(model.GetOrderDetails(oid, HttpContext.Session.GetString(SessionVars.User)));
+        }
+
         public ActionResult AddOrder()
         {
             // Must be logged in
@@ -36,8 +69,10 @@ namespace Casestudy.Controllers
             string addedMessage = "";
             try
             {
-                Dictionary<string, object> orderItems =
-                    HttpContext.Session.Get<Dictionary<string, object>>(SessionVars.Cart);
+                // Get Cart Items
+                Dictionary<string, object> orderItems = HttpContext.Session.Get<Dictionary<string, object>>(SessionVars.Cart);
+
+                // Add Order to DB, ref param for extra message when items are backordered
                 retVal = model.AddOrder(orderItems, HttpContext.Session.GetString(SessionVars.User), ref addedMessage);
                 if (retVal > 0) //Order Added
                 {
@@ -45,7 +80,7 @@ namespace Casestudy.Controllers
                 }
                 else
                 {
-                    retMessage = "Tray not added, try again later";
+                    retMessage = "Order not created, try again later";
                 }
             }
             catch (Exception ex)

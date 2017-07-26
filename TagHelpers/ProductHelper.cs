@@ -35,7 +35,7 @@ namespace Casestudy.TagHelpers
                             + product.ProductName + "<br/><img style=\"height:200px; max-width: 200px;\" src=\"/img/" +
                             product.GraphicName + ".jpg" + "\"" + "/></span></li>");
                         innerHtml.Append("<li><span style=\"font-size:large;\">" + product.Description.Substring(0, 20) + "...</span></li>");
-                        innerHtml.Append("<li><span style=\"font-size:large;\"> Our Price: <strong>$" + product.CostPrice.ToString("#.00") + "</strong></span></li>");
+                        innerHtml.Append("<li><span style=\"font-size:large;\"> Our Price: <strong>$" + product.MSRP.ToString("#.00") + "</strong></span></li>");
                         innerHtml.Append("<li><a href=\"#details_popup\" class=\"btn btn-primary\" data-toggle=\"modal\" id=\"modalbtn" +product.Id + "\" data-details='" + product.JsonData + "' data-id=\"" + product.Id + "\">Details</a>");
                         if (product.QtyOnHand == 0)
                             innerHtml.Append("<span class=\"label label-danger\" style=\"margin-left: 10px;\">Sold Out</span></li>");

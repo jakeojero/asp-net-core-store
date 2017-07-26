@@ -46,6 +46,9 @@ namespace Casestudy.Controllers
             return View(vm);
         }
 
+        /*
+         *  SelectBrand Action takes the  value of the brand dropdown and displays products
+         */
         public IActionResult SelectBrand (BrandViewModel vm)
         {
             BrandModel brandModel = new BrandModel(_db);
@@ -81,6 +84,9 @@ namespace Casestudy.Controllers
             return View("Index", vm);
         }
 
+        /*
+         *  Selecting Specific items when Add to Cart is selected
+         */
         [HttpPost]
         public ActionResult SelectItem(BrandViewModel vm)
         {
@@ -134,7 +140,8 @@ namespace Casestudy.Controllers
             HttpContext.Session.Set<ProductViewModel[]>(SessionVars.Products, menu);
             HttpContext.Session.Set<Dictionary<string, object>>(SessionVars.Cart, cart);
             vm.SetBrands(HttpContext.Session.Get<List<Brand>>(SessionVars.Brands));
-            return View("Index", vm);
+            //return View("Index", vm);
+            return PartialView("AddToCartPartial");
 
         }
     }

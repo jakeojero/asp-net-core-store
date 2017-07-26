@@ -18,6 +18,16 @@
     });
 });
 
+$(document).on('submit', '#brandsForm', function () {
+    var $theForm = $(this);
+    // manually trigger validation
+    $.post('/Brand/SelectItem', $theForm.serialize())
+        .done(function (response) {
+            $('#results').text(response);
+        })
+    return false;
+});
+
 function CopyToModal(id, data) {
     $("#qty").val("0");
     $("#productPrice").text(data.CostPrice.toFixed(2));

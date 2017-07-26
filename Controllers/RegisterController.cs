@@ -38,6 +38,7 @@ namespace Casestudy.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Create new AppUser and set fields to POSTed model
                 var user = new ApplicationUser { UserName = model.Email,
                                                  Email = model.Email,
                                                  Age = model.Age,
@@ -51,12 +52,15 @@ namespace Casestudy.Controllers
                                                  Mailcode = model.Mailcode
                                                };
 
+                // Create the user
                 var result = await _usrMgr.CreateAsync(user, model.Password);
 
                 ViewBag.RegisterError = false;
                 if (result.Succeeded)
                 {
+                    // Sign User in
                     await _signInMgr.SignInAsync(user, isPersistent: false);
+                    HttpContext.Session.SetString(SessionVars.User, user.Email);
                     HttpContext.Session.SetString(SessionVars.LoginStatus, "logged on as " + model.Email);
                     HttpContext.Session.SetString(SessionVars.Message, "Registered, logged on as " + model.Email);
                 }
