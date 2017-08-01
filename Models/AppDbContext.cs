@@ -22,11 +22,15 @@ namespace Casestudy.Models
 
             builder.Entity<OrderLineItem>().ForSqlServerToTable("OrderItems")
                 .Property(c => c.Id).UseSqlServerIdentityColumn();
+
+            builder.Entity<Branch>().ForSqlServerToTable("Branches")
+                .Property(c => c.Id).UseSqlServerIdentityColumn();
         }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderLineItem> OrderItems { get; set; }
+        public virtual DbSet<Branch> Branches { get; set; }
         
     }
 }

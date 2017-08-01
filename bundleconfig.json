@@ -2,7 +2,7 @@
   {
     "outputFileName": "wwwroot/css/site.min.css",
     "inputFiles": [
-      "wwwroot/css/catalogue.css",
+      "wwwroot/css/casestudy.css",
       "wwwroot/css/modal.css"
     ]
   },

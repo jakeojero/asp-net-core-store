@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\Casestudyjo - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\casestudy.css" />
     <Content Include="wwwroot\css\catalogue.css" />
     <Content Include="wwwroot\css\modal.css" />
     <Content Include="wwwroot\img\asus-chromebook.jpg" />
@@ -32,21 +37,27 @@
     <Content Include="wwwroot\img\macbook.jpg" />
     <Content Include="wwwroot\img\mackbook-air.jpg" />
     <Content Include="wwwroot\img\mackbook-air.png" />
+    <Content Include="wwwroot\img\marker1.png" />
+    <Content Include="wwwroot\img\marker2.png" />
+    <Content Include="wwwroot\img\marker3.png" />
     <Content Include="wwwroot\img\test.jpg" />
     <Content Include="wwwroot\js\login.js" />
     <Content Include="wwwroot\js\orderlist.js" />
     <Content Include="wwwroot\js\product-modal.js" />
     <Content Include="wwwroot\js\register.js" />
+    <Content Include="wwwroot\js\storemap.js" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Brand\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Data\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\Branch\" />
     <Folder Include="Views\Register\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>

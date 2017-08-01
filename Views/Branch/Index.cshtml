@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<link href="~/css/modal.css" rel="stylesheet" />
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFeOfe9156dSSdzKXLnBp7wOeI72NPmS0"></script>
+
+
+
+<div id="stores">
+
+
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 text-center" style="margin-top: 60px;">
+
+            <hr class="colorgraph">
+
+                <h3>Search Nearby Branches <img src="~/img/logo.png" height="50" width="50" /></h3>
+                <p><b>Your Address:</b></p>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" v-model="address">
+                        <span class="input-group-btn">
+                            <input type="button" v-on:click="loadAndShowModal();" value="Locate Branches" class="btn btn-primary" />
+                        </span>
+                    </div>
+                </div>
+
+                <div class="well well-sm">
+                    Example: London, ON or N5Y5R6 or 1460 Oxford St. London, On
+                </div>
+
+            <hr class="colorgraph">
+            </div>
+
+    <modal v-if="showModal" v-on:close="showModal=false" :lat="lat" :lng="lng"></modal>
+</div>
+
+<script src="~/js/storemap.js"></script>
+
+
+        <!-- template for the modal component -->
+        <script type="text/x-template" id="modal-template">
+            <transition name="modal">
+                <div class="modal-mask">
+                    <div class="modal-wrapper">
+                        <div class="modal-container">
+                            <div class="modal-header">
+                                <slot name="header">
+                                    <span class="row">
+                                        <button type="button" class="btn btn-link closeModalX pull-right" v-on:click="$emit('close')">
+                                            X
+                                        </button>
+                                    </span>
+                                    <div class="row text-center" style="top:-60px;position:relative;">
+                                        <h3>3 Closest Branches</h3>
+                                        <img src="/img/logo.png" height="50" width="50" />
+                                    </div>
+                                </slot>
+                            </div>
+                            <div class="modal-body">
+                                <div id="map" class="googlemap"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <slot name="footer">
+                                </slot>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </script>

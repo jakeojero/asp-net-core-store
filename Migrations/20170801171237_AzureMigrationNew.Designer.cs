@@ -8,8 +8,8 @@ using Casestudy.Models;
 namespace Casestudy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20170713121636_ThirdMigration")]
-    partial class ThirdMigration
+    [Migration("20170801171237_AzureMigrationNew")]
+    partial class AzureMigrationNew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,6 +83,34 @@ namespace Casestudy.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Casestudy.Models.Branch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasMaxLength(150);
+
+                    b.Property<double?>("Distance");
+
+                    b.Property<double?>("Latitude");
+
+                    b.Property<double?>("Longitude");
+
+                    b.Property<string>("Region")
+                        .HasMaxLength(2);
+
+                    b.Property<string>("Street")
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Branches");
+
+                    b.HasAnnotation("SqlServer:TableName", "Branches");
                 });
 
             modelBuilder.Entity("Casestudy.Models.Brand", b =>

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Casestudy.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Casestudy.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString(SessionVars.LoginStatus) == null)

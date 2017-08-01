@@ -13,6 +13,8 @@ using Casestudy.Models;
 using Casestudy.Utils;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Casestudy
 {
@@ -41,7 +43,20 @@ namespace Casestudy
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<SessionUtils>();
 
-            services.AddMvc();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Cookies.ApplicationCookie.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login");
+            });
+            // only allow authenticated users
+            var defaultPolicy = new AuthorizationPolicyBuilder()
+             .RequireAuthenticatedUser()
+             .Build();
+
+            services.AddMvc(setup =>
+            {
+                setup.Filters.Add(new AuthorizeFilter(defaultPolicy));
+            });
+
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
