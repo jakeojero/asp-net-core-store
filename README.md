@@ -11,7 +11,7 @@
 
 Email:
 ```
-tester@test.com
+test@test.com
 ```
 Password:
 ```
