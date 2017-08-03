@@ -64,11 +64,11 @@
                             </li>
                             <li v-for="detail in details" class="list-group-item row">
                                 <span class="col-xs-3 col-sm-4">{{detail.productName}}</span>
-                                <span class="col-xs-2 col-sm-3">{{'$' + detail.sellingPrice.toFixed(2) }}</span>
+                                <span class="col-xs-2 col-sm-3">{{cur(detail.sellingPrice) }}</span>
                                 <span class="col-xs-1">{{detail.qtySold}}</span>
                                 <span class="col-xs-1">{{detail.qtyOrdered}}</span>
                                 <span class="col-xs-1">{{detail.qtyBackOrdered}}</span>
-                                <span class="col-xs-2">{{'$' + (detail.qtyOrdered * detail.sellingPrice).toFixed(2)}}</span>
+                                <span class="col-xs-2">{{cur((detail.qtyOrdered * detail.sellingPrice))}}</span>
                             </li>
                         </ul>
 
@@ -76,11 +76,11 @@
                             <slot name="footer">
                                 <div class="text-right">
                                     <span class="col-xs-10">Subtotal</span>
-                                    <span class="col-xs-2">{{'$' + details[0].subTotal.toFixed(2)}}</span>
+                                    <span class="col-xs-2">{{cur(details[0].subTotal)}}</span>
                                     <span class="col-xs-10">Tax</span>
-                                    <span class="col-xs-2">{{'$' + details[0].tax.toFixed(2)}}</span>
+                                    <span class="col-xs-2">{{cur(details[0].tax)}}</span>
                                     <span class="col-xs-10">Order Amount</span>
-                                    <span class="col-xs-2"><strong>{{'$' + details[0].orderAmount.toFixed(2)}}</strong></span>
+                                    <span class="col-xs-2"><strong>{{cur(details[0].orderAmount)}}</strong></span>
                                 </div>
                             </slot>
                         </div>
