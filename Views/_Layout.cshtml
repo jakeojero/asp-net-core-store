@@ -13,9 +13,9 @@
 
 </head>
 <body>
-    <div class="navbar-wrapper">
-        <div class="container-fluid">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -23,60 +23,77 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/Home"><img src="~/img/logo.png" height="50" width="50" style="float:left; margin-top:-15px; margin-right: 15px;"/>INFO3067 Casestudy</a>
+                    <a class="navbar-brand" href="/Home"><img src="~/img/logo.png" height="50" width="50" style="float:left; margin-top:-15px; margin-right: 15px;" />Laptop Shop</a>
                 </div>
-                <div class="col-md-2"></div>
+
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    @*<span class="pull-right" style="padding-right:5%;padding-top:1%;">@Context.Session.GetString(SessionVars.LoginStatus)</span>*@
-                    <ul class="nav navbar-nav" id="menu">
+    
+                    <ul class="nav navbar-nav">
                         <li><a href="/Home">Home</a></li>
-                        <li><a href="/Data">Data Refresh</a></li>
                         <li><a href="/Brand">Brands</a></li>
                         <li><a href="/Register">Register</a></li>
                         <li><a href="/Cart/List">Orders</a></li>
                         <li><a href="/Branch">Branches</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-
-                        @if (SessionUtils.CartContainsItems())
-                        {
-                            <li>
-                                <a>
-                                    <span class="glyphicon glyphicon-user" style="padding-right: 5px;"></span>@Context.Session.GetString(SessionVars.LoginStatus)
-                                </a>
-                            </li>
-                            <li><a style="margin-right: 50px;" href="/Cart"><span class="glyphicon glyphicon-shopping-cart" style="padding-right: 5px;"></span>@SessionUtils.GetCartSize() Items</a></li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a style="margin-right: 50px;">
-                                    <span class="glyphicon glyphicon-user" style="padding-right: 5px;"></span>@Context.Session.GetString(SessionVars.LoginStatus)
-                                </a>
-                            </li>
-                        }
 
                         @if (@SessionUtils.UserExists())
                         {
-                            <li><a href="/Login/Logoff" style="margin-right: 50px;">Logoff</a></li>
+                            @if (SessionUtils.CartContainsItems())
+                            {
+                                <li><a href="/Cart"><span class="glyphicon glyphicon-shopping-cart" style="padding-right: 5px;"></span>@SessionUtils.GetCartSize() Items</a></li>
+                            }
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <strong style="padding: 0 10px 0 10px;">@Context.Session.GetString(SessionVars.LoginStatus)</strong>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="navbar-login">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-lg-4">
+                                                    <p class="text-center">
+                                                        <img src="~/img/logo.png" height="50" width="50" />
+                                                    </p>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-8">
+                                                    <p class="text-center"><strong>@Context.Session.GetString(SessionVars.User)</strong></p>
+                                                    <p class="text-center">
+                                                        <a href="/Login/Logoff" class="btn btn-danger btn-block btn-sm">Logout</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                </ul>
+                            </li>
                         }
                         else
                         {
-                            <li><a href="/Login" style="margin-right: 50px;">Login</a></li>
+                            <li id="loginBtnNav" style="padding: 0 15px 0 15px;">
+                                <p class="navbar-btn">
+                                    <a href="/Login" class="btn btn-primary">Login</a>
+                                </p>
+                            </li>
                         }
+
+                       
                     </ul>
                 </div>
-            </nav>
-        </div>
-        </div>
-            <div style="padding-top:5%;">
-                @RenderBody()
             </div>
+    </nav>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script src="~/js/jquery.validate.min.js"></script>
-            <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script src="~/js/site.min.js"></script>
+    <div style="padding-top:5%;">
+        @RenderBody()
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/js/site.min.js"></script>
 </body>
+
 </html>

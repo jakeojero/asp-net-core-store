@@ -78,8 +78,11 @@ namespace Casestudy.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Get the user that was logged in to display first and last name at login
+                    ApplicationUser user = await _usrMgr.FindByEmailAsync(model.Email);
+
                     HttpContext.Session.SetString(SessionVars.User, model.Email);
-                    HttpContext.Session.SetString(SessionVars.LoginStatus, "Welcome, "+ model.Email);
+                    HttpContext.Session.SetString(SessionVars.LoginStatus, user.Firstname + ", " + user.Lastname);
                     HttpContext.Session.SetString(SessionVars.Message, "Welcome " + model.Email);
                     return RedirectToLocal(returnUrl);
                 }
