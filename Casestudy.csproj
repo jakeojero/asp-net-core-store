@@ -41,7 +41,6 @@
     <Content Include="wwwroot\img\marker2.png" />
     <Content Include="wwwroot\img\marker3.png" />
     <Content Include="wwwroot\img\test.jpg" />
-    <Content Include="wwwroot\js\login.js" />
     <Content Include="wwwroot\js\orderlist.js" />
     <Content Include="wwwroot\js\product-modal.js" />
     <Content Include="wwwroot\js\register.js" />

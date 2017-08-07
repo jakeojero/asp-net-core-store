@@ -1,5 +1,5 @@
 ﻿// modal component using axios
-Vue.component('modal', {
+Vue.component('branchmodal', {
     template: '#modal-template',
     props: {
         details: [],
@@ -60,7 +60,7 @@ Vue.component('modal', {
 
 // Vue instance using google maps geocoder
 var app = new Vue({
-    el: '#stores',
+    el: '#branches',
     methods: {
         loadAndShowModal: function () {
             var self = this;

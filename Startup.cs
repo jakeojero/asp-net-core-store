@@ -47,6 +47,7 @@ namespace Casestudy
             {
                 options.Cookies.ApplicationCookie.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login");
             });
+
             // only allow authenticated users
             var defaultPolicy = new AuthorizationPolicyBuilder()
              .RequireAuthenticatedUser()

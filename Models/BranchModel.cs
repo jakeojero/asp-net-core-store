@@ -22,7 +22,7 @@ namespace Casestudy.Models
             {
                 var latParam = new SqlParameter("@lat", lat);
                 var lngParam = new SqlParameter("@lng", lng);
-                var query = _db.Branches.FromSql("dbo.pGetThreeClosestStores @lat = {0}, @lng = {1}", lat, lng);
+                var query = _db.Branches.FromSql("dbo.pGetThreeClosestBranches @lat, @lng", latParam, lngParam);
                 storeDetails = query.ToList();
             }
             catch (Exception ex)

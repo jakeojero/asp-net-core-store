@@ -16,19 +16,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr href="#" v-for="order in orders" v-on:click="modalItem=order;loadAndShowModal();">
+                <tr href="#" v-for="order in orders" v-on:click="modalItem=order;loadAndShowModal();" style="cursor: pointer;">
                     <td>{{order.id}}</td>
                     <td>{{formatDate(order.orderDate)}}</td>
                 </tr>
             </tbody>
         </table>
-        <modal v-if="showModal" v-on:close="showModal = false" :item="modalItem" :details="details"></modal>
+        <ordermodal v-if="showModal" v-on:close="showModal = false" :item="modalItem" :details="details"></ordermodal>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
-<script src="~/js/orderlist.js"></script>
 
 <!-- template for the modal component -->
 <script type="text/x-template" id="modal-template">

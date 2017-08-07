@@ -2,7 +2,7 @@
 var detailslink = '/GetOrderDetails/';
 
 // Register modal Component
-Vue.component('modal', {
+Vue.component('ordermodal', {
     template: '#modal-template',
     props: {
         item: {},
