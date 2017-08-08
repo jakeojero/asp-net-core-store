@@ -5,23 +5,28 @@
 }
 
 <div id="orders">
-    <div class="col-sm-4">&nbsp;</div>
-    <div class="col-sm-4 col-xs-12" style="margin-top:5%;">
-        <h3>Past Orders <img src="~/img/logo.png" height="50" width="50" style="float:right;" /></h3> 
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 text-center" style="margin-top: 60px;">
+
+        <hr class="colorgraph">
+        <h3 style="text-align: left">Past Orders <img src="~/img/logo.png" height="50" width="50" style="float: right;" /></h3> 
+
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Date</th>
-                </tr>
+            <tr>
+                <th style="text-align: center;">Id</th>
+                <th style="text-align: center;">Date</th>
+            </tr>
             </thead>
             <tbody>
-                <tr href="#" v-for="order in orders" v-on:click="modalItem=order;loadAndShowModal();" style="cursor: pointer;">
-                    <td>{{order.id}}</td>
-                    <td>{{formatDate(order.orderDate)}}</td>
-                </tr>
+            <tr href="#" v-for="order in orders" v-on:click="modalItem=order;loadAndShowModal();" style="cursor: pointer;">
+                <td>{{order.id}}</td>
+                <td>{{formatDate(order.orderDate)}}</td>
+            </tr>
             </tbody>
         </table>
+        
+        <hr class="colorgraph">
+    </div>
         <ordermodal v-if="showModal" v-on:close="showModal = false" :item="modalItem" :details="details"></ordermodal>
     </div>
 </div>
