@@ -33,8 +33,8 @@ Vue.component('branchmodal', {
                         map: map,
                         animation: google.maps.Animation.DROP,
                         icon: "../img/marker" + i2 + ".png",
-                        title: "Store# " + self.details[i].id + " " + self.details[i].street + ", " + self.details[i].city + ", " + self.details[i].region,
-                        html: "<div>Store# " + self.details[i].id + "<br/>" +
+                        title: "Branch# " + self.details[i].id + " " + self.details[i].street + ", " + self.details[i].city + ", " + self.details[i].region,
+                        html: "<div>Branch# " + self.details[i].id + "<br/>" +
                         self.details[i].street + ", " + self.details[i].city + "<br/>" +
                         self.details[i].distance.toFixed(2) + " km</div>"
                     });
